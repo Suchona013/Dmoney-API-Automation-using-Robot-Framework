@@ -4,6 +4,7 @@
 - Robot Framework 
 - Selenium
 - SeleniumLibrary
+- Robotframework-jsonlibrary
 - Python
 - PyCharm 
 
@@ -23,7 +24,7 @@ Run the following commands from the terminal of the editor
       pip install robotframework-seleniumlibrary
       
 - Plugin Intellibot @SeleniumLibrary Patched
-- robotframework-jsonlibrary
+- Robotframework-jsonlibrary
 - Requests
 - Robotframework-requests
 - jsonpath_rw
