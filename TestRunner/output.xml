@@ -1,0 +1,2341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.1 on win32)" generated="20230121 00:50:46.936" rpa="false" schemaversion="3">
+<suite id="s1" name="TestRunner" source="F:\automation with python\API Automation using Robot Framework\TestRunner\TestRunner.robot">
+<test id="s1-t1" name="login" line="23">
+<kw name="TC: Successful Login with Valid Credential" library="LoginWithValidCredential">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.150" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.150" endtime="20230121 00:50:47.150"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>email=salman@roadtocareer.net</arg>
+<arg>password=1234</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.150" level="INFO">${body} = {'email': 'salman@roadtocareer.net', 'password': '1234'}</msg>
+<status status="PASS" starttime="20230121 00:50:47.150" endtime="20230121 00:50:47.150"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.151" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20230121 00:50:47.150" endtime="20230121 00:50:47.151"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/user/login</arg>
+<arg>json=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:47.183" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/user/login 
+ path_url=/user/login 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '56'} 
+ body=b'{"email": "salman@roadtocareer.net", "password": "1234"}' 
+ </msg>
+<msg timestamp="20230121 00:50:47.183" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/user/login 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"f0-I7es+TBlUDcv0MtGlGOpQBwfX+E"', 'Content-Length': '240', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"Login successfully","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8"} 
+ </msg>
+<msg timestamp="20230121 00:50:47.183" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.151" endtime="20230121 00:50:47.183"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>response:\n ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.184" endtime="20230121 00:50:47.186"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.211" level="INFO">${message} = ['Login successfully']</msg>
+<status status="PASS" starttime="20230121 00:50:47.186" endtime="20230121 00:50:47.211"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>message:\n ${message[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.211" endtime="20230121 00:50:47.213"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${response.json()}</arg>
+<arg>token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.228" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.213" endtime="20230121 00:50:47.228"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.229" level="INFO">${json_obj} = {'agent': 1229, 'agent_balance': 51.25, 'agent_phone_number': '01594702255', 'customer1_balance': 25, 'customerId_1': 1227, 'customerId_2': 1228, 'customer_phone_number_1': '01501714792', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.228" endtime="20230121 00:50:47.229"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>token=${token[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.229" endtime="20230121 00:50:47.230"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:47.230" endtime="20230121 00:50:47.230"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>Login successfully</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230121 00:50:47.230" endtime="20230121 00:50:47.231"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.231" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.231" endtime="20230121 00:50:47.231"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.149" endtime="20230121 00:50:47.232"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.149" endtime="20230121 00:50:47.233"/>
+</test>
+<test id="s1-t2" name="Create Users" line="26">
+<kw name="TC: Create a Customer 1" library="CreateCustomer_1">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.234" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.234" endtime="20230121 00:50:47.234"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${random_number}</var>
+<arg>8</arg>
+<arg>[NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:47.234" level="INFO">${random_number} = 03505383</msg>
+<status status="PASS" starttime="20230121 00:50:47.234" endtime="20230121 00:50:47.234"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${randomName}</var>
+<arg>8-15</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:47.235" level="INFO">${randomName} = XCjZkxrvaFQQ5yX</msg>
+<status status="PASS" starttime="20230121 00:50:47.234" endtime="20230121 00:50:47.235"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${randomEmail}</var>
+<arg>EmailTest${randomName}@gmail.com</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.235" level="INFO">${randomEmail} = EmailTestXCjZkxrvaFQQ5yX@gmail.com</msg>
+<status status="PASS" starttime="20230121 00:50:47.235" endtime="20230121 00:50:47.235"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${password}</var>
+<arg>TestPassword${randomName}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.235" level="INFO">${password} = TestPasswordXCjZkxrvaFQQ5yX</msg>
+<status status="PASS" starttime="20230121 00:50:47.235" endtime="20230121 00:50:47.235"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${phoneNumber}</var>
+<arg>015${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.235" level="INFO">${phoneNumber} = 01503505383</msg>
+<status status="PASS" starttime="20230121 00:50:47.235" endtime="20230121 00:50:47.235"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${nid}</var>
+<arg>65777${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.236" level="INFO">${nid} = 6577703505383</msg>
+<status status="PASS" starttime="20230121 00:50:47.235" endtime="20230121 00:50:47.236"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${role}</var>
+<arg>Customer</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.236" level="INFO">${role} = Customer</msg>
+<status status="PASS" starttime="20230121 00:50:47.236" endtime="20230121 00:50:47.236"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_data}</var>
+<arg>name=${randomName}</arg>
+<arg>email=${randomEmail}</arg>
+<arg>password=${password}</arg>
+<arg>phone_number=${phoneNumber}</arg>
+<arg>nid=${nid}</arg>
+<arg>role=${role}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.236" level="INFO">${user_data} = {'name': 'XCjZkxrvaFQQ5yX', 'email': 'EmailTestXCjZkxrvaFQQ5yX@gmail.com', 'password': 'TestPasswordXCjZkxrvaFQQ5yX', 'phone_number': '01503505383', 'nid': '6577703505383', 'role': 'Customer'}</msg>
+<status status="PASS" starttime="20230121 00:50:47.236" endtime="20230121 00:50:47.236"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_data},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:47.237" level="INFO">${user_info_json} = {
+    "name": "XCjZkxrvaFQQ5yX",
+    "email": "EmailTestXCjZkxrvaFQQ5yX@gmail.com",
+    "password": "TestPasswordXCjZkxrvaFQQ5yX",
+    "phone_number": "01503505383",
+    "nid": "6577703505383",
+    "r...</msg>
+<status status="PASS" starttime="20230121 00:50:47.236" endtime="20230121 00:50:47.237"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.237" endtime="20230121 00:50:47.237"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.243" level="INFO">${json_obj} = {'agent': 1229, 'agent_balance': 51.25, 'agent_phone_number': '01594702255', 'customer1_balance': 25, 'customerId_1': 1227, 'customerId_2': 1228, 'customer_phone_number_1': '01501714792', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.237" endtime="20230121 00:50:47.243"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.255" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.243" endtime="20230121 00:50:47.255"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.256" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.255" endtime="20230121 00:50:47.256"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/user/create</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:47.291" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/user/create 
+ path_url=/user/create 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '218'} 
+ body={
+    "name": "XCjZkxrvaFQQ5yX",
+    "email": "EmailTestXCjZkxrvaFQQ5yX@gmail.com",
+    "password": "TestPasswordXCjZkxrvaFQQ5yX",
+    "phone_number": "01503505383",
+    "nid": "6577703505383",
+    "role": "Customer"
+} 
+ </msg>
+<msg timestamp="20230121 00:50:47.291" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/user/create 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"13c-E6CBIIjJMxm9i9Sd9FS0TLBoyD0"', 'Content-Length': '316', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User created successfully","user":{"id":1230,"name":"XCjZkxrvaFQQ5yX","email":"EmailTestXCjZkxrvaFQQ5yX@gmail.com","password":"TestPasswordXCjZkxrvaFQQ5yX","phone_number":"01503505383","nid":"6577703505383","role":"Customer","createdAt":"2023-01-20T18:50:48.000Z","updatedAt":"2023-01-20T18:50:48.000Z"}} 
+ </msg>
+<msg timestamp="20230121 00:50:47.291" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.256" endtime="20230121 00:50:47.291"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.291" endtime="20230121 00:50:47.293"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.313" level="INFO">${message} = ['User created successfully']</msg>
+<status status="PASS" starttime="20230121 00:50:47.293" endtime="20230121 00:50:47.313"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_id}</var>
+<arg>${response.json()}</arg>
+<arg>user.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.338" level="INFO">${customer_id} = [1230]</msg>
+<status status="PASS" starttime="20230121 00:50:47.313" endtime="20230121 00:50:47.338"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customerId_1=${customer_id[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.339" endtime="20230121 00:50:47.339"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_phone_number}</var>
+<arg>${response.json()}</arg>
+<arg>user.phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.354" level="INFO">${customer_phone_number} = ['01503505383']</msg>
+<status status="PASS" starttime="20230121 00:50:47.340" endtime="20230121 00:50:47.354"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customer_phone_number_1=${customer_phone_number[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.354" endtime="20230121 00:50:47.354"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:47.354" endtime="20230121 00:50:47.355"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User created successfully</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230121 00:50:47.355" endtime="20230121 00:50:47.355"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.356" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.356" endtime="20230121 00:50:47.356"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.234" endtime="20230121 00:50:47.356"/>
+</kw>
+<kw name="TC: Create a Customer 2" library="CreateCustomer_2">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.357" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.357" endtime="20230121 00:50:47.357"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${random_number}</var>
+<arg>8</arg>
+<arg>[NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:47.358" level="INFO">${random_number} = 80785502</msg>
+<status status="PASS" starttime="20230121 00:50:47.357" endtime="20230121 00:50:47.358"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${randomName}</var>
+<arg>8-15</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:47.358" level="INFO">${randomName} = K0nEnfsey8x2</msg>
+<status status="PASS" starttime="20230121 00:50:47.358" endtime="20230121 00:50:47.358"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${randomEmail}</var>
+<arg>EmailTest${randomName}@gmail.com</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.358" level="INFO">${randomEmail} = EmailTestK0nEnfsey8x2@gmail.com</msg>
+<status status="PASS" starttime="20230121 00:50:47.358" endtime="20230121 00:50:47.358"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${password}</var>
+<arg>TestPassword${randomName}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.358" level="INFO">${password} = TestPasswordK0nEnfsey8x2</msg>
+<status status="PASS" starttime="20230121 00:50:47.358" endtime="20230121 00:50:47.358"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${phoneNumber}</var>
+<arg>015${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.358" level="INFO">${phoneNumber} = 01580785502</msg>
+<status status="PASS" starttime="20230121 00:50:47.358" endtime="20230121 00:50:47.358"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${nid}</var>
+<arg>65777${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.359" level="INFO">${nid} = 6577780785502</msg>
+<status status="PASS" starttime="20230121 00:50:47.358" endtime="20230121 00:50:47.359"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${role}</var>
+<arg>Customer</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.359" level="INFO">${role} = Customer</msg>
+<status status="PASS" starttime="20230121 00:50:47.359" endtime="20230121 00:50:47.359"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_data}</var>
+<arg>name=${randomName}</arg>
+<arg>email=${randomEmail}</arg>
+<arg>password=${password}</arg>
+<arg>phone_number=${phoneNumber}</arg>
+<arg>nid=${nid}</arg>
+<arg>role=${role}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.359" level="INFO">${user_data} = {'name': 'K0nEnfsey8x2', 'email': 'EmailTestK0nEnfsey8x2@gmail.com', 'password': 'TestPasswordK0nEnfsey8x2', 'phone_number': '01580785502', 'nid': '6577780785502', 'role': 'Customer'}</msg>
+<status status="PASS" starttime="20230121 00:50:47.359" endtime="20230121 00:50:47.359"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_data},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:47.360" level="INFO">${user_info_json} = {
+    "name": "K0nEnfsey8x2",
+    "email": "EmailTestK0nEnfsey8x2@gmail.com",
+    "password": "TestPasswordK0nEnfsey8x2",
+    "phone_number": "01580785502",
+    "nid": "6577780785502",
+    "role": "Cu...</msg>
+<status status="PASS" starttime="20230121 00:50:47.359" endtime="20230121 00:50:47.360"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.360" endtime="20230121 00:50:47.360"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.368" level="INFO">${json_obj} = {'agent': 1229, 'agent_balance': 51.25, 'agent_phone_number': '01594702255', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1228, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.360" endtime="20230121 00:50:47.368"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.381" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.368" endtime="20230121 00:50:47.381"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.382" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.381" endtime="20230121 00:50:47.382"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/user/create</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:47.419" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/user/create 
+ path_url=/user/create 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '209'} 
+ body={
+    "name": "K0nEnfsey8x2",
+    "email": "EmailTestK0nEnfsey8x2@gmail.com",
+    "password": "TestPasswordK0nEnfsey8x2",
+    "phone_number": "01580785502",
+    "nid": "6577780785502",
+    "role": "Customer"
+} 
+ </msg>
+<msg timestamp="20230121 00:50:47.419" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/user/create 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"133-awdfkwxrc748GRy0oI2TL3juYjw"', 'Content-Length': '307', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User created successfully","user":{"id":1231,"name":"K0nEnfsey8x2","email":"EmailTestK0nEnfsey8x2@gmail.com","password":"TestPasswordK0nEnfsey8x2","phone_number":"01580785502","nid":"6577780785502","role":"Customer","createdAt":"2023-01-20T18:50:48.000Z","updatedAt":"2023-01-20T18:50:48.000Z"}} 
+ </msg>
+<msg timestamp="20230121 00:50:47.419" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.382" endtime="20230121 00:50:47.419"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.419" endtime="20230121 00:50:47.420"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.440" level="INFO">${message} = ['User created successfully']</msg>
+<status status="PASS" starttime="20230121 00:50:47.421" endtime="20230121 00:50:47.440"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_id}</var>
+<arg>${response.json()}</arg>
+<arg>user.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.456" level="INFO">${customer_id} = [1231]</msg>
+<status status="PASS" starttime="20230121 00:50:47.440" endtime="20230121 00:50:47.456"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customerId_2=${customer_id[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.457" endtime="20230121 00:50:47.457"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_phone_number}</var>
+<arg>${response.json()}</arg>
+<arg>user.phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.473" level="INFO">${customer_phone_number} = ['01580785502']</msg>
+<status status="PASS" starttime="20230121 00:50:47.457" endtime="20230121 00:50:47.473"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customer_phone_number_2=${customer_phone_number[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.473" endtime="20230121 00:50:47.474"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:47.474" endtime="20230121 00:50:47.474"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User created successfully</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230121 00:50:47.474" endtime="20230121 00:50:47.475"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.475" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.475" endtime="20230121 00:50:47.475"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.357" endtime="20230121 00:50:47.475"/>
+</kw>
+<kw name="TC: Create an Agent" library="CreateAgent">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.476" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.476" endtime="20230121 00:50:47.476"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${random_number}</var>
+<arg>8</arg>
+<arg>[NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:47.476" level="INFO">${random_number} = 87117635</msg>
+<status status="PASS" starttime="20230121 00:50:47.476" endtime="20230121 00:50:47.476"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${randomName}</var>
+<arg>8-15</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:47.477" level="INFO">${randomName} = QwAee5UY4iFT7vs</msg>
+<status status="PASS" starttime="20230121 00:50:47.477" endtime="20230121 00:50:47.477"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${randomEmail}</var>
+<arg>EmailTest${randomName}@gmail.com</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.477" level="INFO">${randomEmail} = EmailTestQwAee5UY4iFT7vs@gmail.com</msg>
+<status status="PASS" starttime="20230121 00:50:47.477" endtime="20230121 00:50:47.477"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${password}</var>
+<arg>TestPassword${randomName}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.477" level="INFO">${password} = TestPasswordQwAee5UY4iFT7vs</msg>
+<status status="PASS" starttime="20230121 00:50:47.477" endtime="20230121 00:50:47.477"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${phoneNumber}</var>
+<arg>015${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.477" level="INFO">${phoneNumber} = 01587117635</msg>
+<status status="PASS" starttime="20230121 00:50:47.477" endtime="20230121 00:50:47.477"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${nid}</var>
+<arg>65777${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.477" level="INFO">${nid} = 6577787117635</msg>
+<status status="PASS" starttime="20230121 00:50:47.477" endtime="20230121 00:50:47.477"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${role}</var>
+<arg>Agent</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:47.478" level="INFO">${role} = Agent</msg>
+<status status="PASS" starttime="20230121 00:50:47.477" endtime="20230121 00:50:47.478"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_data}</var>
+<arg>name=${randomName}</arg>
+<arg>email=${randomEmail}</arg>
+<arg>password=${password}</arg>
+<arg>phone_number=${phoneNumber}</arg>
+<arg>nid=${nid}</arg>
+<arg>role=${role}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.478" level="INFO">${user_data} = {'name': 'QwAee5UY4iFT7vs', 'email': 'EmailTestQwAee5UY4iFT7vs@gmail.com', 'password': 'TestPasswordQwAee5UY4iFT7vs', 'phone_number': '01587117635', 'nid': '6577787117635', 'role': 'Agent'}</msg>
+<status status="PASS" starttime="20230121 00:50:47.478" endtime="20230121 00:50:47.478"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_data},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:47.478" level="INFO">${user_info_json} = {
+    "name": "QwAee5UY4iFT7vs",
+    "email": "EmailTestQwAee5UY4iFT7vs@gmail.com",
+    "password": "TestPasswordQwAee5UY4iFT7vs",
+    "phone_number": "01587117635",
+    "nid": "6577787117635",
+    "r...</msg>
+<status status="PASS" starttime="20230121 00:50:47.478" endtime="20230121 00:50:47.478"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.479" endtime="20230121 00:50:47.479"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.485" level="INFO">${json_obj} = {'agent': 1229, 'agent_balance': 51.25, 'agent_phone_number': '01594702255', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.479" endtime="20230121 00:50:47.485"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.498" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.486" endtime="20230121 00:50:47.498"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.499" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.499" endtime="20230121 00:50:47.499"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/user/create</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:47.540" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/user/create 
+ path_url=/user/create 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '215'} 
+ body={
+    "name": "QwAee5UY4iFT7vs",
+    "email": "EmailTestQwAee5UY4iFT7vs@gmail.com",
+    "password": "TestPasswordQwAee5UY4iFT7vs",
+    "phone_number": "01587117635",
+    "nid": "6577787117635",
+    "role": "Agent"
+} 
+ </msg>
+<msg timestamp="20230121 00:50:47.541" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/user/create 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"139-J3r2awQRxjQgLeIKhtPlIsvbW1g"', 'Content-Length': '313', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User created successfully","user":{"id":1232,"name":"QwAee5UY4iFT7vs","email":"EmailTestQwAee5UY4iFT7vs@gmail.com","password":"TestPasswordQwAee5UY4iFT7vs","phone_number":"01587117635","nid":"6577787117635","role":"Agent","createdAt":"2023-01-20T18:50:48.000Z","updatedAt":"2023-01-20T18:50:48.000Z"}} 
+ </msg>
+<msg timestamp="20230121 00:50:47.541" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.499" endtime="20230121 00:50:47.541"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.541" endtime="20230121 00:50:47.543"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.562" level="INFO">${message} = ['User created successfully']</msg>
+<status status="PASS" starttime="20230121 00:50:47.543" endtime="20230121 00:50:47.562"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_id}</var>
+<arg>${response.json()}</arg>
+<arg>user.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.579" level="INFO">${customer_id} = [1232]</msg>
+<status status="PASS" starttime="20230121 00:50:47.562" endtime="20230121 00:50:47.579"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>agent=${customer_id[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.579" endtime="20230121 00:50:47.580"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_phone_number}</var>
+<arg>${response.json()}</arg>
+<arg>user.phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.596" level="INFO">${customer_phone_number} = ['01587117635']</msg>
+<status status="PASS" starttime="20230121 00:50:47.580" endtime="20230121 00:50:47.596"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>agent_phone_number=${customer_phone_number[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.597" endtime="20230121 00:50:47.597"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:47.597" endtime="20230121 00:50:47.598"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User created successfully</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230121 00:50:47.598" endtime="20230121 00:50:47.599"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.599" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.599" endtime="20230121 00:50:47.599"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.476" endtime="20230121 00:50:47.599"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.233" endtime="20230121 00:50:47.600"/>
+</test>
+<test id="s1-t3" name="Search User Info for New Created Users" line="31">
+<kw name="TC: Search User" library="SearchUser">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.601" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.601" endtime="20230121 00:50:47.601"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.608" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.601" endtime="20230121 00:50:47.608"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.623" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.608" endtime="20230121 00:50:47.623"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_1_id}</var>
+<arg>${json_obj}</arg>
+<arg>$.customerId_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.639" level="INFO">${customer_1_id} = [1230]</msg>
+<status status="PASS" starttime="20230121 00:50:47.624" endtime="20230121 00:50:47.639"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.640" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.639" endtime="20230121 00:50:47.640"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${search_user_req_url}${customer_1_id}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:47.640" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:47.671" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/user/search?id=%5B1230%5D 
+ path_url=/user/search?id=%5B1230%5D 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:47.671" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/user/search?id=%5B1230%5D 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"d-O3i+ap2cff5bxhPRN8PyzcjObvA"', 'Content-Length': '13', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"user":null} 
+ </msg>
+<msg timestamp="20230121 00:50:47.671" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.640" endtime="20230121 00:50:47.671"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.671" endtime="20230121 00:50:47.673"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.674" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.673" endtime="20230121 00:50:47.674"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.601" endtime="20230121 00:50:47.674"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.600" endtime="20230121 00:50:47.675"/>
+</test>
+<test id="s1-t4" name="Deposit to Agent" line="34">
+<kw name="TC1:Successful Deposit To Agent" library="DepositToAgent">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.677" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.677" endtime="20230121 00:50:47.677"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.677" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.677" endtime="20230121 00:50:47.677"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.693" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.678" endtime="20230121 00:50:47.693"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.agent_phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.714" level="INFO">${agent_phone_number} = ['01587117635']</msg>
+<status status="PASS" starttime="20230121 00:50:47.693" endtime="20230121 00:50:47.714"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${amount}</var>
+<arg>100</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20230121 00:50:47.714" level="INFO">${amount} = 100</msg>
+<status status="PASS" starttime="20230121 00:50:47.714" endtime="20230121 00:50:47.714"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_info}</var>
+<arg>from_account=SYSTEM</arg>
+<arg>to_account=${agent_phone_number[0]}</arg>
+<arg>amount=${amount}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.716" level="INFO">${user_info} = {'from_account': 'SYSTEM', 'to_account': '01587117635', 'amount': 100}</msg>
+<status status="PASS" starttime="20230121 00:50:47.714" endtime="20230121 00:50:47.716"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_info},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:47.716" level="INFO">${user_info_json} = {
+    "from_account": "SYSTEM",
+    "to_account": "01587117635",
+    "amount": 100
+}</msg>
+<status status="PASS" starttime="20230121 00:50:47.716" endtime="20230121 00:50:47.716"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.717" endtime="20230121 00:50:47.717"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.718" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.717" endtime="20230121 00:50:47.718"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${req_url}</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:47.756" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/transaction/deposit 
+ path_url=/transaction/deposit 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '84'} 
+ body={
+    "from_account": "SYSTEM",
+    "to_account": "01587117635",
+    "amount": 100
+} 
+ </msg>
+<msg timestamp="20230121 00:50:47.756" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/transaction/deposit 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"60-wUuAtbNqn726G3EIFy6Xb+nUsEc"', 'Content-Length': '96', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"Deposit successful","trnxId":"TXN228601","commission":2.5,"currentBalance":19485785} 
+ </msg>
+<msg timestamp="20230121 00:50:47.756" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.718" endtime="20230121 00:50:47.756"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.756" endtime="20230121 00:50:47.757"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.780" level="INFO">${message} = ['Deposit successful']</msg>
+<status status="PASS" starttime="20230121 00:50:47.757" endtime="20230121 00:50:47.780"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>Deposit successful</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:47.780" endtime="20230121 00:50:47.781"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.781" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.781" endtime="20230121 00:50:47.781"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.676" endtime="20230121 00:50:47.781"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.676" endtime="20230121 00:50:47.782"/>
+</test>
+<test id="s1-t5" name="Check System Balance After Deposit to agent" line="37">
+<kw name="TC: Check System Balance" library="CheckSystemBalance">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.783" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.783" endtime="20230121 00:50:47.783"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.784" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.783" endtime="20230121 00:50:47.784"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.798" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.784" endtime="20230121 00:50:47.798"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.798" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.798" endtime="20230121 00:50:47.798"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${system_bln_req_url}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:47.799" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:47.830" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/transaction/balance/SYSTEM 
+ path_url=/transaction/balance/SYSTEM 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:47.830" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/transaction/balance/SYSTEM 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"2d-jj7zR/PSxLO+gsJYGpRIa0xzl88"', 'Content-Length': '45', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User balance","balance":19485785} 
+ </msg>
+<msg timestamp="20230121 00:50:47.830" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.799" endtime="20230121 00:50:47.830"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.831" endtime="20230121 00:50:47.831"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.832" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.832" endtime="20230121 00:50:47.832"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${system_balance}</var>
+<arg>${response.json()}</arg>
+<arg>balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.854" level="INFO">${system_balance} = [19485785]</msg>
+<status status="PASS" starttime="20230121 00:50:47.833" endtime="20230121 00:50:47.854"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.783" endtime="20230121 00:50:47.854"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.782" endtime="20230121 00:50:47.854"/>
+</test>
+<test id="s1-t6" name="Check Agent Balance after Deposit From System to Agent" line="40">
+<kw name="TC: Check Agent Balance" library="CheckAgentBalance">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.855" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.855" endtime="20230121 00:50:47.855"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.857" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:47.855" endtime="20230121 00:50:47.857"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.872" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.857" endtime="20230121 00:50:47.872"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:47.873" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:47.872" endtime="20230121 00:50:47.873"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.agent_phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.885" level="INFO">${agent_phone_number} = ['01587117635']</msg>
+<status status="PASS" starttime="20230121 00:50:47.873" endtime="20230121 00:50:47.885"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${user_bln_req_url}${agent_phone_number[0]}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:47.885" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:47.913" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/transaction/balance/01587117635 
+ path_url=/transaction/balance/01587117635 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:47.913" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/transaction/balance/01587117635 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"28-YfWy0XcNlPjEZC+rY+tfbDC1Zs8"', 'Content-Length': '40', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User balance","balance":100} 
+ </msg>
+<msg timestamp="20230121 00:50:47.913" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.885" endtime="20230121 00:50:47.913"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.913" endtime="20230121 00:50:47.914"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_balance}</var>
+<arg>${response.json()}</arg>
+<arg>balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.934" level="INFO">${agent_balance} = [100]</msg>
+<status status="PASS" starttime="20230121 00:50:47.914" endtime="20230121 00:50:47.934"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>agent_balance=${agent_balance[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:47.934" endtime="20230121 00:50:47.934"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:47.935" endtime="20230121 00:50:47.935"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:47.936" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:47.935" endtime="20230121 00:50:47.936"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.949" level="INFO">${message} = ['User balance']</msg>
+<status status="PASS" starttime="20230121 00:50:47.936" endtime="20230121 00:50:47.949"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User balance</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:47.949" endtime="20230121 00:50:47.950"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.855" endtime="20230121 00:50:47.950"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.855" endtime="20230121 00:50:47.950"/>
+</test>
+<test id="s1-t7" name="Deposit to Customer" line="43">
+<kw name="TC: Deposit To Customer &amp; Validate Checking Agent Balance After Depositing to Customer" library="DepositToCustomer">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:47.951" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:47.951" endtime="20230121 00:50:47.951"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:47.957" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 100, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_phon...</msg>
+<status status="PASS" starttime="20230121 00:50:47.951" endtime="20230121 00:50:47.957"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.970" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:47.957" endtime="20230121 00:50:47.970"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.agent_phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.983" level="INFO">${agent_phone_number} = ['01587117635']</msg>
+<status status="PASS" starttime="20230121 00:50:47.970" endtime="20230121 00:50:47.983"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer_phone_number_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:47.997" level="INFO">${customer1_phone_number} = ['01503505383']</msg>
+<status status="PASS" starttime="20230121 00:50:47.984" endtime="20230121 00:50:47.997"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Value saved as a list:${customer1_phone_number}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:47.997" endtime="20230121 00:50:47.997"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_bln_before_deposit}</var>
+<arg>${json_obj}</arg>
+<arg>$.agent_balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.011" level="INFO">${agent_bln_before_deposit} = [100]</msg>
+<status status="PASS" starttime="20230121 00:50:47.997" endtime="20230121 00:50:48.011"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>before deposit:${agent_bln_before_deposit[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.011" endtime="20230121 00:50:48.012"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${amount}</var>
+<arg>50</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20230121 00:50:48.013" level="INFO">${amount} = 50</msg>
+<status status="PASS" starttime="20230121 00:50:48.012" endtime="20230121 00:50:48.013"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>deposit amount:${amount}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.013" endtime="20230121 00:50:48.013"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${agent_bln_after_deposit}</var>
+<arg>${agent_bln_before_deposit[0]}-${amount}+1.25</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:48.014" level="INFO">${agent_bln_after_deposit} = 51.25</msg>
+<status status="PASS" starttime="20230121 00:50:48.013" endtime="20230121 00:50:48.014"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>after deposit:${agent_bln_after_deposit}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.014" endtime="20230121 00:50:48.014"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_info}</var>
+<arg>from_account=${agent_phone_number[0]}</arg>
+<arg>to_account=${customer1_phone_number[0]}</arg>
+<arg>amount=${amount}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.015" level="INFO">${user_info} = {'from_account': '01587117635', 'to_account': '01503505383', 'amount': 50}</msg>
+<status status="PASS" starttime="20230121 00:50:48.014" endtime="20230121 00:50:48.015"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_info},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:48.015" level="INFO">${user_info_json} = {
+    "from_account": "01587117635",
+    "to_account": "01503505383",
+    "amount": 50
+}</msg>
+<status status="PASS" starttime="20230121 00:50:48.015" endtime="20230121 00:50:48.016"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.016" endtime="20230121 00:50:48.016"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.017" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.016" endtime="20230121 00:50:48.017"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${req_url}</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:48.051" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/transaction/deposit 
+ path_url=/transaction/deposit 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '88'} 
+ body={
+    "from_account": "01587117635",
+    "to_account": "01503505383",
+    "amount": 50
+} 
+ </msg>
+<msg timestamp="20230121 00:50:48.051" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/transaction/deposit 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:48 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"5e-GH0KRhhaQAh9fipp+IMkZ4q2UpU"', 'Content-Length': '94', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"Deposit successful","trnxId":"TXN343564","commission":1.25,"currentBalance":51.25} 
+ </msg>
+<msg timestamp="20230121 00:50:48.052" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.017" endtime="20230121 00:50:48.052"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.052" endtime="20230121 00:50:48.053"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.073" level="INFO">${message} = ['Deposit successful']</msg>
+<status status="PASS" starttime="20230121 00:50:48.053" endtime="20230121 00:50:48.073"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_current_bln}</var>
+<arg>${response.json()}</arg>
+<arg>currentBalance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.086" level="INFO">${agent_current_bln} = [51.25]</msg>
+<status status="PASS" starttime="20230121 00:50:48.074" endtime="20230121 00:50:48.086"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>Deposit successful</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.086" endtime="20230121 00:50:48.086"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.087" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.086" endtime="20230121 00:50:48.087"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${agent_bln_after_deposit}</arg>
+<arg>${agent_current_bln[0]}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230121 00:50:48.087" endtime="20230121 00:50:48.087"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.951" endtime="20230121 00:50:48.087"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:47.950" endtime="20230121 00:50:48.088"/>
+</test>
+<test id="s1-t8" name="Check Agent Balance after Deposit From Agent to Customer" line="47">
+<kw name="TC: Check Agent Balance" library="CheckAgentBalance">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.090" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.090" endtime="20230121 00:50:48.090"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.091" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 100, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_phon...</msg>
+<status status="PASS" starttime="20230121 00:50:48.090" endtime="20230121 00:50:48.091"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.107" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.091" endtime="20230121 00:50:48.107"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.108" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.107" endtime="20230121 00:50:48.108"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.agent_phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.123" level="INFO">${agent_phone_number} = ['01587117635']</msg>
+<status status="PASS" starttime="20230121 00:50:48.108" endtime="20230121 00:50:48.123"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${user_bln_req_url}${agent_phone_number[0]}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:48.123" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.145" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/transaction/balance/01587117635 
+ path_url=/transaction/balance/01587117635 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:48.145" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/transaction/balance/01587117635 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"2a-P+ht01FsKgA5gtPyz4t6W4pNmro"', 'Content-Length': '42', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User balance","balance":51.25} 
+ </msg>
+<msg timestamp="20230121 00:50:48.145" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.123" endtime="20230121 00:50:48.145"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.145" endtime="20230121 00:50:48.146"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_balance}</var>
+<arg>${response.json()}</arg>
+<arg>balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.163" level="INFO">${agent_balance} = [51.25]</msg>
+<status status="PASS" starttime="20230121 00:50:48.147" endtime="20230121 00:50:48.163"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>agent_balance=${agent_balance[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:48.164" endtime="20230121 00:50:48.164"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:48.164" endtime="20230121 00:50:48.165"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.166" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.165" endtime="20230121 00:50:48.166"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.180" level="INFO">${message} = ['User balance']</msg>
+<status status="PASS" starttime="20230121 00:50:48.166" endtime="20230121 00:50:48.180"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User balance</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.181" endtime="20230121 00:50:48.182"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.089" endtime="20230121 00:50:48.182"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.089" endtime="20230121 00:50:48.182"/>
+</test>
+<test id="s1-t9" name="Check Customer Balance After Deposit &amp; Before Send Money" line="50">
+<kw name="TC: Check Customer Balance After Deposit" library="CustomerBalanceAfterDeposit">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.183" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.183" endtime="20230121 00:50:48.183"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.185" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.183" endtime="20230121 00:50:48.185"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.197" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.185" endtime="20230121 00:50:48.197"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.198" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.197" endtime="20230121 00:50:48.198"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer_phone_number_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.210" level="INFO">${customer1_phone_number} = ['01503505383']</msg>
+<status status="PASS" starttime="20230121 00:50:48.198" endtime="20230121 00:50:48.210"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${user_bln_after_deposit_req_url}${customer1_phone_number[0]}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:48.211" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.232" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/transaction/balance/01503505383 
+ path_url=/transaction/balance/01503505383 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:48.232" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/transaction/balance/01503505383 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"27-uQI6z8GWS8bi7VK40ib2vLSmA7w"', 'Content-Length': '39', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User balance","balance":50} 
+ </msg>
+<msg timestamp="20230121 00:50:48.232" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.211" endtime="20230121 00:50:48.232"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.232" endtime="20230121 00:50:48.234"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_balance}</var>
+<arg>${response.json()}</arg>
+<arg>balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.267" level="INFO">${customer1_balance} = [50]</msg>
+<status status="PASS" starttime="20230121 00:50:48.234" endtime="20230121 00:50:48.267"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customer1_balance=${customer1_balance[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:48.267" endtime="20230121 00:50:48.268"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:48.268" endtime="20230121 00:50:48.269"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.269" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.269" endtime="20230121 00:50:48.269"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.281" level="INFO">${message} = ['User balance']</msg>
+<status status="PASS" starttime="20230121 00:50:48.269" endtime="20230121 00:50:48.281"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User balance</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.282" endtime="20230121 00:50:48.282"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.282" endtime="20230121 00:50:48.283"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.183" endtime="20230121 00:50:48.283"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.183" endtime="20230121 00:50:48.283"/>
+</test>
+<test id="s1-t10" name="Withdraw Money" line="53">
+<kw name="TC: Withdraw Money By Customer" library="WithdrawMoney">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.284" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.284" endtime="20230121 00:50:48.284"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.289" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 50, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.284" endtime="20230121 00:50:48.289"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.310" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.289" endtime="20230121 00:50:48.310"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${agent_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.agent_phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.325" level="INFO">${agent_phone_number} = ['01587117635']</msg>
+<status status="PASS" starttime="20230121 00:50:48.310" endtime="20230121 00:50:48.325"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer_phone_number_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.338" level="INFO">${customer1_phone_number} = ['01503505383']</msg>
+<status status="PASS" starttime="20230121 00:50:48.325" endtime="20230121 00:50:48.338"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${amount}</var>
+<arg>20</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20230121 00:50:48.339" level="INFO">${amount} = 20</msg>
+<status status="PASS" starttime="20230121 00:50:48.339" endtime="20230121 00:50:48.339"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_info}</var>
+<arg>from_account=${customer1_phone_number[0]}</arg>
+<arg>to_account=${agent_phone_number[0]}</arg>
+<arg>amount=${amount}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.340" level="INFO">${user_info} = {'from_account': '01503505383', 'to_account': '01587117635', 'amount': 20}</msg>
+<status status="PASS" starttime="20230121 00:50:48.339" endtime="20230121 00:50:48.340"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_info},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:48.341" level="INFO">${user_info_json} = {
+    "from_account": "01503505383",
+    "to_account": "01587117635",
+    "amount": 20
+}</msg>
+<status status="PASS" starttime="20230121 00:50:48.341" endtime="20230121 00:50:48.341"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.341" endtime="20230121 00:50:48.342"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.342" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.342" endtime="20230121 00:50:48.342"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${withdraw_req_url}</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:48.380" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/transaction/withdraw 
+ path_url=/transaction/withdraw 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '88'} 
+ body={
+    "from_account": "01503505383",
+    "to_account": "01587117635",
+    "amount": 20
+} 
+ </msg>
+<msg timestamp="20230121 00:50:48.381" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/transaction/withdraw 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"52-1zxrd6/GtC9eiuKueD2AGperfNc"', 'Content-Length': '82', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"Withdraw successful","trnxId":"TXN826736","fee":5,"currentBalance":25} 
+ </msg>
+<msg timestamp="20230121 00:50:48.381" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.342" endtime="20230121 00:50:48.381"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.381" endtime="20230121 00:50:48.382"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.398" level="INFO">${message} = ['Withdraw successful']</msg>
+<status status="PASS" starttime="20230121 00:50:48.382" endtime="20230121 00:50:48.398"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>Withdraw successful</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.398" endtime="20230121 00:50:48.398"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.399" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.399" endtime="20230121 00:50:48.399"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.284" endtime="20230121 00:50:48.401"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.284" endtime="20230121 00:50:48.401"/>
+</test>
+<test id="s1-t11" name="Check Customer Balance After Withdraw Money" line="56">
+<kw name="TC: Check Customer Balance After Deposit" library="CustomerBalanceAfterDeposit">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.402" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.401" endtime="20230121 00:50:48.402"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.402" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 50, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.402" endtime="20230121 00:50:48.402"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.418" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.402" endtime="20230121 00:50:48.418"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.419" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.418" endtime="20230121 00:50:48.419"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer_phone_number_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.433" level="INFO">${customer1_phone_number} = ['01503505383']</msg>
+<status status="PASS" starttime="20230121 00:50:48.419" endtime="20230121 00:50:48.433"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${user_bln_after_deposit_req_url}${customer1_phone_number[0]}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:48.433" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.461" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/transaction/balance/01503505383 
+ path_url=/transaction/balance/01503505383 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:48.462" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/transaction/balance/01503505383 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"27-ceo7UvXhlPR9DtEslMm/QxRbvpY"', 'Content-Length': '39', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User balance","balance":25} 
+ </msg>
+<msg timestamp="20230121 00:50:48.462" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.433" endtime="20230121 00:50:48.462"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.462" endtime="20230121 00:50:48.463"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_balance}</var>
+<arg>${response.json()}</arg>
+<arg>balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.480" level="INFO">${customer1_balance} = [25]</msg>
+<status status="PASS" starttime="20230121 00:50:48.463" endtime="20230121 00:50:48.480"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customer1_balance=${customer1_balance[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:48.480" endtime="20230121 00:50:48.481"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:48.481" endtime="20230121 00:50:48.482"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.482" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.482" endtime="20230121 00:50:48.482"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.495" level="INFO">${message} = ['User balance']</msg>
+<status status="PASS" starttime="20230121 00:50:48.482" endtime="20230121 00:50:48.495"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User balance</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.495" endtime="20230121 00:50:48.496"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${message[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.496" endtime="20230121 00:50:48.497"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.401" endtime="20230121 00:50:48.497"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.401" endtime="20230121 00:50:48.497"/>
+</test>
+<test id="s1-t12" name="Send Money From Customer To Another Customer" line="59">
+<kw name="TC: Send Money From Customer 1 To Customer 2 &amp; Validate Checking Customer Balance After Send Money to another customer" library="SendMoney">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.498" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.498" endtime="20230121 00:50:48.498"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.500" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.498" endtime="20230121 00:50:48.500"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.513" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.500" endtime="20230121 00:50:48.513"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer_phone_number_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.528" level="INFO">${customer1_phone_number} = ['01503505383']</msg>
+<status status="PASS" starttime="20230121 00:50:48.513" endtime="20230121 00:50:48.528"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer2_phone_number}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer_phone_number_2</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.541" level="INFO">${customer2_phone_number} = ['01580785502']</msg>
+<status status="PASS" starttime="20230121 00:50:48.528" endtime="20230121 00:50:48.541"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_1_bln_before_send_money}</var>
+<arg>${json_obj}</arg>
+<arg>$.customer1_balance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.554" level="INFO">${customer_1_bln_before_send_money} = [25]</msg>
+<status status="PASS" starttime="20230121 00:50:48.541" endtime="20230121 00:50:48.554"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>customer 1 balance:${customer_1_bln_before_send_money}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.554" endtime="20230121 00:50:48.555"/>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${amount}</var>
+<arg>20</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20230121 00:50:48.555" level="INFO">${amount} = 20</msg>
+<status status="PASS" starttime="20230121 00:50:48.555" endtime="20230121 00:50:48.555"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${bln_after_send_money}</var>
+<arg>${customer_1_bln_before_send_money[0]}-${amount}-5</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:48.556" level="INFO">${bln_after_send_money} = 0</msg>
+<status status="PASS" starttime="20230121 00:50:48.555" endtime="20230121 00:50:48.556"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>customer 1 balance after deposit:${bln_after_send_money}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.556" endtime="20230121 00:50:48.556"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_info}</var>
+<arg>from_account=${customer1_phone_number[0]}</arg>
+<arg>to_account=${customer2_phone_number[0]}</arg>
+<arg>amount=${amount}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.557" level="INFO">${user_info} = {'from_account': '01503505383', 'to_account': '01580785502', 'amount': 20}</msg>
+<status status="PASS" starttime="20230121 00:50:48.556" endtime="20230121 00:50:48.557"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_info},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:48.558" level="INFO">${user_info_json} = {
+    "from_account": "01503505383",
+    "to_account": "01580785502",
+    "amount": 20
+}</msg>
+<status status="PASS" starttime="20230121 00:50:48.558" endtime="20230121 00:50:48.558"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.558" endtime="20230121 00:50:48.558"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.560" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.559" endtime="20230121 00:50:48.560"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${send_money_req_url}</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230121 00:50:48.595" level="INFO">POST Request : url=http://dmoney.roadtocareer.net/transaction/sendmoney 
+ path_url=/transaction/sendmoney 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '88'} 
+ body={
+    "from_account": "01503505383",
+    "to_account": "01580785502",
+    "amount": 20
+} 
+ </msg>
+<msg timestamp="20230121 00:50:48.595" level="INFO">POST Response : url=http://dmoney.roadtocareer.net/transaction/sendmoney 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"53-0LOInwqyUuzPKc/Z388PvgWe534"', 'Content-Length': '83', 'Status': '201 Created', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"Send money successful","trnxId":"TXN797378","fee":5,"currentBalance":0} 
+ </msg>
+<msg timestamp="20230121 00:50:48.595" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.560" endtime="20230121 00:50:48.595"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.595" endtime="20230121 00:50:48.596"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.611" level="INFO">${message} = ['Send money successful']</msg>
+<status status="PASS" starttime="20230121 00:50:48.596" endtime="20230121 00:50:48.611"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${current_bln_after_send_money}</var>
+<arg>${response.json()}</arg>
+<arg>currentBalance</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.625" level="INFO">${current_bln_after_send_money} = [0]</msg>
+<status status="PASS" starttime="20230121 00:50:48.611" endtime="20230121 00:50:48.625"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>Send money successful</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.625" endtime="20230121 00:50:48.625"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.627" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.625" endtime="20230121 00:50:48.627"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${current_bln_after_send_money[0]}</arg>
+<arg>${bln_after_send_money}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230121 00:50:48.627" endtime="20230121 00:50:48.627"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.498" endtime="20230121 00:50:48.627"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.497" endtime="20230121 00:50:48.627"/>
+</test>
+<test id="s1-t13" name="Update User Info" line="62">
+<kw name="TC: Update User" library="UpdateUserInfo">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.628" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.628" endtime="20230121 00:50:48.628"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${random_number}</var>
+<arg>8</arg>
+<arg>[NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:48.629" level="INFO">${random_number} = 59622578</msg>
+<status status="PASS" starttime="20230121 00:50:48.629" endtime="20230121 00:50:48.629"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${randomName}</var>
+<arg>8-15</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20230121 00:50:48.630" level="INFO">${randomName} = LXH3L0Gxbk</msg>
+<status status="PASS" starttime="20230121 00:50:48.629" endtime="20230121 00:50:48.630"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${nid}</var>
+<arg>614353${random_number}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:48.630" level="INFO">${nid} = 61435359622578</msg>
+<status status="PASS" starttime="20230121 00:50:48.630" endtime="20230121 00:50:48.630"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${role}</var>
+<arg>Customer</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20230121 00:50:48.630" level="INFO">${role} = Customer</msg>
+<status status="PASS" starttime="20230121 00:50:48.630" endtime="20230121 00:50:48.630"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${user_data}</var>
+<arg>name=tk</arg>
+<arg>email=abc@gmail.com</arg>
+<arg>password=TestPass</arg>
+<arg>phone_number=013${random_number}</arg>
+<arg>nid=${nid}</arg>
+<arg>role=${role}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.631" level="INFO">${user_data} = {'name': 'tk', 'email': 'abc@gmail.com', 'password': 'TestPass', 'phone_number': '01359622578', 'nid': '61435359622578', 'role': 'Customer'}</msg>
+<status status="PASS" starttime="20230121 00:50:48.630" endtime="20230121 00:50:48.631"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${user_info_json}</var>
+<arg>json.dumps(${user_data},indent=4)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230121 00:50:48.631" level="INFO">${user_info_json} = {
+    "name": "tk",
+    "email": "abc@gmail.com",
+    "password": "TestPass",
+    "phone_number": "01359622578",
+    "nid": "61435359622578",
+    "role": "Customer"
+}</msg>
+<status status="PASS" starttime="20230121 00:50:48.631" endtime="20230121 00:50:48.631"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${user_info_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.631" endtime="20230121 00:50:48.632"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.632" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.632" endtime="20230121 00:50:48.632"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_id}</var>
+<arg>${json_obj}</arg>
+<arg>$.customerId_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.649" level="INFO">${customer1_id} = [1230]</msg>
+<status status="PASS" starttime="20230121 00:50:48.632" endtime="20230121 00:50:48.649"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.663" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.649" endtime="20230121 00:50:48.663"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.664" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.663" endtime="20230121 00:50:48.664"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${user_update_req_url}/${customer1_id[0]}</arg>
+<arg>data=${user_info_json}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `PUT On Session` instead.</doc>
+<msg timestamp="20230121 00:50:48.664" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.690" level="INFO">PUT Request : url=http://dmoney.roadtocareer.net/user/update/1230 
+ path_url=/user/update/1230 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '166'} 
+ body=b'{\n    "name": "tk",\n    "email": "abc@gmail.com",\n    "password": "TestPass",\n    "phone_number": "01359622578",\n    "nid": "61435359622578",\n    "role": "Customer"\n}' 
+ </msg>
+<msg timestamp="20230121 00:50:48.690" level="INFO">PUT Response : url=http://dmoney.roadtocareer.net/user/update/1230 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"b0-bLHA+myOh6Cu3gYoiOdIrGsVta4"', 'Content-Length': '176', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User updated successfully","user":{"name":"tk","email":"abc@gmail.com","password":"TestPass","phone_number":"01359622578","nid":"61435359622578","role":"Customer"}} 
+ </msg>
+<msg timestamp="20230121 00:50:48.690" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.664" endtime="20230121 00:50:48.690"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.690" endtime="20230121 00:50:48.692"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.704" level="INFO">${message} = ['User updated successfully']</msg>
+<status status="PASS" starttime="20230121 00:50:48.692" endtime="20230121 00:50:48.704"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_phone_number}</var>
+<arg>${response.json()}</arg>
+<arg>user.phone_number</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.720" level="INFO">${customer_phone_number} = ['01359622578']</msg>
+<status status="PASS" starttime="20230121 00:50:48.705" endtime="20230121 00:50:48.720"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${json_obj}</arg>
+<arg>customer_1_phone_number=${customer_phone_number[0]}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230121 00:50:48.720" endtime="20230121 00:50:48.721"/>
+</kw>
+<kw name="Dump Json To File" library="JSONLibrary">
+<arg>${json_file_path}</arg>
+<arg>${json_obj}</arg>
+<doc>Dump JSON to file</doc>
+<status status="PASS" starttime="20230121 00:50:48.721" endtime="20230121 00:50:48.722"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>successfully</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230121 00:50:48.722" endtime="20230121 00:50:48.723"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.724" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.723" endtime="20230121 00:50:48.724"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.628" endtime="20230121 00:50:48.724"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.627" endtime="20230121 00:50:48.724"/>
+</test>
+<test id="s1-t14" name="Delete User Info" line="65">
+<kw name="TC: Delete User" library="DeleteUser">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.725" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.725" endtime="20230121 00:50:48.726"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.733" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.726" endtime="20230121 00:50:48.733"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.748" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.733" endtime="20230121 00:50:48.748"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.749" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.748" endtime="20230121 00:50:48.749"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_id}</var>
+<arg>${json_obj}</arg>
+<arg>$.customerId_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.762" level="INFO">${customer1_id} = [1230]</msg>
+<status status="PASS" starttime="20230121 00:50:48.749" endtime="20230121 00:50:48.762"/>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${user_del_req_url}/${customer1_id[0]}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `DELETE On Session` instead.</doc>
+<msg timestamp="20230121 00:50:48.762" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.790" level="INFO">DELETE Request : url=http://dmoney.roadtocareer.net/user/delete/1230 
+ path_url=/user/delete/1230 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:48.790" level="INFO">DELETE Response : url=http://dmoney.roadtocareer.net/user/delete/1230 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"27-27o4zzUjhHNmthTJyia4gBCjpos"', 'Content-Length': '39', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"message":"User deleted successfully"} 
+ </msg>
+<msg timestamp="20230121 00:50:48.790" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.762" endtime="20230121 00:50:48.790"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.790" endtime="20230121 00:50:48.791"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.792" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.791" endtime="20230121 00:50:48.792"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${message}</var>
+<arg>${response.json()}</arg>
+<arg>message</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.805" level="INFO">${message} = ['User deleted successfully']</msg>
+<status status="PASS" starttime="20230121 00:50:48.792" endtime="20230121 00:50:48.805"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${message[0]}</arg>
+<arg>User deleted successfully</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230121 00:50:48.805" endtime="20230121 00:50:48.806"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.725" endtime="20230121 00:50:48.806"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.725" endtime="20230121 00:50:48.806"/>
+</test>
+<test id="s1-t15" name="Search User Info After Deleted the User" line="68">
+<kw name="TC: Search User" library="SearchUser">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230121 00:50:48.808" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230121 00:50:48.807" endtime="20230121 00:50:48.808"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230121 00:50:48.808" level="INFO">${json_obj} = {'agent': 1232, 'agent_balance': 51.25, 'agent_phone_number': '01587117635', 'customer1_balance': 25, 'customerId_1': 1230, 'customerId_2': 1231, 'customer_phone_number_1': '01503505383', 'customer_ph...</msg>
+<status status="PASS" starttime="20230121 00:50:48.808" endtime="20230121 00:50:48.808"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.824" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8'...</msg>
+<status status="PASS" starttime="20230121 00:50:48.809" endtime="20230121 00:50:48.824"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer_1_id}</var>
+<arg>${json_obj}</arg>
+<arg>$.customerId_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230121 00:50:48.838" level="INFO">${customer_1_id} = [1230]</msg>
+<status status="PASS" starttime="20230121 00:50:48.824" endtime="20230121 00:50:48.838"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230121 00:50:48.839" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230121 00:50:48.838" endtime="20230121 00:50:48.839"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${search_user_req_url}${customer_1_id}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230121 00:50:48.839" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.869" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/user/search?id=%5B1230%5D 
+ path_url=/user/search?id=%5B1230%5D 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjQwNjQ4LCJleHAiOjE2NzQyNDI0NDh9.KhbG7MU3ZDzH7pTD21GpKDaR3AEuw4_WchNhokiZtC8', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230121 00:50:48.869" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/user/search?id=%5B1230%5D 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 18:50:49 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"d-O3i+ap2cff5bxhPRN8PyzcjObvA"', 'Content-Length': '13', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"user":null} 
+ </msg>
+<msg timestamp="20230121 00:50:48.869" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.839" endtime="20230121 00:50:48.869"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230121 00:50:48.869" endtime="20230121 00:50:48.870"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230121 00:50:48.871" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230121 00:50:48.871" endtime="20230121 00:50:48.871"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.807" endtime="20230121 00:50:48.871"/>
+</kw>
+<status status="PASS" starttime="20230121 00:50:48.807" endtime="20230121 00:50:48.871"/>
+</test>
+<status status="PASS" starttime="20230121 00:50:46.938" endtime="20230121 00:50:48.873"/>
+</suite>
+<statistics>
+<total>
+<stat pass="15" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="15" fail="0" skip="0" id="s1" name="TestRunner">TestRunner</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230121 00:50:47.640" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:47.799" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:47.885" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.123" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.211" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.433" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.664" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.762" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20230121 00:50:48.839" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>

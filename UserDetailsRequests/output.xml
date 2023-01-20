@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.1 on win32)" generated="20230120 19:34:32.840" rpa="false" schemaversion="3">
+<suite id="s1" name="UserDetails" source="F:\automation with python\API Automation using Robot Framework\UserDetailsRequests\UserDetails.robot">
+<test id="s1-t1" name="TC:1 Get Customer_1_Details" line="15">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230120 19:34:33.129" level="INFO">Creating Session using : alias=mysession, url=http://dmoney.roadtocareer.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230120 19:34:33.129" endtime="20230120 19:34:33.129"/>
+</kw>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_obj}</var>
+<arg>${json_file_path}</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230120 19:34:33.130" level="INFO">${json_obj} = {'agent': 1053, 'agent_phone_number': '01592468178', 'customerId_1': 1051, 'customerId_2': 1052, 'customer_phone_number_1': '01529663431', 'customer_phone_number_2': '01529372009', 'token': 'eyJhbGciO...</msg>
+<status status="PASS" starttime="20230120 19:34:33.129" endtime="20230120 19:34:33.130"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${token}</var>
+<arg>${json_obj}</arg>
+<arg>$.token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230120 19:34:33.147" level="INFO">${token} = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjE5OTc2LCJleHAiOjE2NzQyMjE3NzZ9.8xVz-eOf6EAEXq7DfsJuDQudP4R-on33cO8MOZev2xU'...</msg>
+<status status="PASS" starttime="20230120 19:34:33.130" endtime="20230120 19:34:33.147"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${id}</var>
+<arg>${json_obj}</arg>
+<arg>$.customerId_1</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230120 19:34:33.163" level="INFO">${id} = [1051]</msg>
+<status status="PASS" starttime="20230120 19:34:33.147" endtime="20230120 19:34:33.163"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token[0]}</arg>
+<arg>X-AUTH-SECRET-KEY=${secret_key}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230120 19:34:33.164" level="INFO">${headers} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjE5OTc2LCJleHAiOjE2NzQy...</msg>
+<status status="PASS" starttime="20230120 19:34:33.164" endtime="20230120 19:34:33.164"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${param}</var>
+<arg>id=${id[0]}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230120 19:34:33.165" level="INFO">${param} = {'id': 1051}</msg>
+<status status="PASS" starttime="20230120 19:34:33.165" endtime="20230120 19:34:33.165"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${req_url}</arg>
+<arg>params=${param}</arg>
+<arg>headers=${headers}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20230120 19:34:33.165" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20230120 19:34:33.205" level="INFO">GET Request : url=http://dmoney.roadtocareer.net/user/search?id=1051 
+ path_url=/user/search?id=1051 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbG1hbkByb2FkdG9jYXJlZXIubmV0IiwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjc0MjE5OTc2LCJleHAiOjE2NzQyMjE3NzZ9.8xVz-eOf6EAEXq7DfsJuDQudP4R-on33cO8MOZev2xU', 'X-AUTH-SECRET-KEY': 'ROADTOSDET'} 
+ body=None 
+ </msg>
+<msg timestamp="20230120 19:34:33.205" level="INFO">GET Response : url=http://dmoney.roadtocareer.net/user/search?id=1051 
+ status=200, reason=OK 
+ headers={'Date': 'Fri, 20 Jan 2023 13:34:33 GMT', 'Server': 'Apache', 'X-Powered-By': 'Express, Phusion Passenger(R) 6.0.16', 'ETag': 'W/"107-g+xivyptHGuz0nnq9qW1US8sq9k"', 'Content-Length': '263', 'Status': '200 OK', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"user":{"id":1051,"name":"XPnlX8i3CM","email":"EmailTestXPnlX8i3CM@gmail.com","password":"TestPasswordXPnlX8i3CM","phone_number":"01529663431","nid":"6577729663431","role":"Customer","createdAt":"2023-01-20T13:28:15.000Z","updatedAt":"2023-01-20T13:28:15.000Z"}} 
+ </msg>
+<msg timestamp="20230120 19:34:33.205" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230120 19:34:33.165" endtime="20230120 19:34:33.205"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${customer1_id}</var>
+<arg>${response.json()}</arg>
+<arg>user.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230120 19:34:33.236" level="INFO">${customer1_id} = [1051]</msg>
+<status status="PASS" starttime="20230120 19:34:33.207" endtime="20230120 19:34:33.236"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230120 19:34:33.237" endtime="20230120 19:34:33.238"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230120 19:34:33.239" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230120 19:34:33.238" endtime="20230120 19:34:33.239"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${customer1_id[0]}</arg>
+<arg>${id[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230120 19:34:33.240" endtime="20230120 19:34:33.241"/>
+</kw>
+<status status="PASS" starttime="20230120 19:34:33.128" endtime="20230120 19:34:33.242"/>
+</test>
+<status status="PASS" starttime="20230120 19:34:32.842" endtime="20230120 19:34:33.243"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="UserDetails">UserDetails</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230120 19:34:33.165" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>
